@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeine Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Фиксированная высота окна */
+            overflow: hidden; /* Запрет прокрутки всего экрана */
+        }
+
+        .price-card {
+            background: #ffffff;
+            width: 90%;
+            max-width: 400px;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section-header {
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #9ca3af;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-header::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #f3f4f6;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            margin-bottom: 3px;
+        }
+
+        .price {
+            font-family: ui-monospace, monospace;
+            font-weight: 700;
+            font-size: 0.8rem;
+            background: #f9fafb;
+            padding: 1px 6px;
+            border-radius: 4px;
+            border: 1px solid #f3f4f6;
+        }
+
+        .desc {
+            font-size: 0.7rem;
+            color: #6b7280;
+            line-height: 1.2;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .lang-select {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            appearance: none;
+            background: #f3f4f6;
+            border: none;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .payment-info {
+            background: #f9fafb;
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 5px;
+        }
+
+        .payment-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            margin-bottom: 4px;
+            color: #4b5563;
+        }
+        .payment-row:last-child { margin-bottom: 0; }
+        .payment-row i { width: 14px; text-align: center; color: #9ca3af; }
+
+        .cta-btn {
+            background: #000;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: transform 0.1s;
+        }
+        .cta-btn:active { transform: scale(0.98); }
+    </style>
+</head>
+<body>
+
+    <div class="price-card">
+        <!-- Selector -->
+        <select id="languageSelect" onchange="changeLanguage()" class="lang-select">
+            <option value="ru">RU</option>
+            <option value="en">EN</option>
+            <option value="ua">UA</option>
+            <option value="kz">KZ</option>
+            <option value="by">BY</option>
+            <option value="uz">UZ</option>
+            <option value="az">AZ</option>
+            <option value="am">AM</option>
+        </select>
+
+        <!-- Title -->
+        <header>
+            <h1 class="text-3xl font-black tracking-tighter leading-none">ZEINE</h1>
+            <p id="slogan" class="text-[8px] font-bold text-gray-400 uppercase tracking-[0.2em] mt-1">Digital Security & OSINT</p>
+        </header>
+
+        <!-- Body -->
+        <div class="section-header" id="header-tg">Аккаунты Телеграм</div>
+        <div class="item">
+            <span id="service-numbers">Физические номера</span>
+            <span class="price">$1+</span>
+        </div>
+
+        <div class="section-header" id="header-invest">Расследования</div>
+        <div class="item">
+            <span id="service-dossier-info">Информационное досье</span>
+            <span class="price">$4.90</span>
+        </div>
+        <div class="item">
+            <span id="service-dossier-op">Оперативное досье</span>
+            <span class="price">$6.50</span>
+        </div>
+
+        <div class="section-header" id="header-protect">Защита данных</div>
+        <div class="item font-bold">
+            <span id="service-audit">1. Персональный аудит</span>
+            <span class="price">$3.90</span>
+        </div>
+        <span class="desc" id="desc-audit">Анализ сети, детальный отчет, рекомендации.</span>
+        
+        <div class="item font-bold">
+            <span id="service-trace">2. Замещение следов</span>
+            <span class="price">$6.10</span>
+        </div>
+        <span class="desc" id="desc-trace">Аудит + легенда и генерация ложных следов.</span>
+
+        <div class="section-header" id="header-edu">Обучение</div>
+        <div class="item font-bold">
+            <span id="service-course">Курс OSINT</span>
+            <span class="price">$6.70</span>
+        </div>
+        <span class="desc" id="desc-course">4 урока, чат, софт, методички и проверка ДЗ.</span>
+
+        <!-- Payment -->
+        <div class="section-header" id="header-payment">Оплата</div>
+        <div class="payment-info">
+            <div class="payment-row">
+                <i class="fas fa-credit-card"></i>
+                <span id="pay-banks">Банки РФ (Любые карты / СБП)</span>
+            </div>
+            <div class="payment-row">
+                <i class="fas fa-gem"></i>
+                <span id="pay-nft">NFT (Коллекции и активы)</span>
+            </div>
+            <div class="payment-row">
+                <i class="fab fa-bitcoin"></i>
+                <span id="pay-crypto">Крипто (USDT / TON)</span>
+            </div>
+        </div>
+
+        <a href="https://t.me/hixwo" target="_blank" class="cta-btn">
+            <i class="fab fa-telegram-plane"></i>
+            <span id="btn-contact">Купить / Связаться</span>
+        </a>
+
+        <div class="text-center mt-3 text-[8px] font-bold text-gray-300 uppercase tracking-widest">
+            @hixwo
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            ru: {
+                headers: { tg: "Аккаунты Телеграм", invest: "Расследования", protect: "Защита данных", edu: "Обучение", payment: "Оплата" },
+                services: { numbers: "Физические номера", dossierInfo: "Информационное досье", dossierOp: "Оперативное досье", audit: "1. Персональный аудит", trace: "2. Замещение следов", course: "Курс OSINT" },
+                desc: { audit: "Анализ сети, детальный отчет, рекомендации.", trace: "Аудит + легенда и генерация ложных следов.", course: "4 урока, чат, софт, методички и проверка ДЗ." },
+                pay: { banks: "Банки РФ (Любые карты / СБП)", nft: "NFT (Коллекции и активы)", crypto: "Крипто (USDT / TON)" },
+                btn: "Купить / Связаться"
+            },
+            en: {
+                headers: { tg: "Telegram Accounts", invest: "Investigations", protect: "Data Protection", edu: "Education", payment: "Payment" },
+                services: { numbers: "Physical Numbers", dossierInfo: "Info Dossier", dossierOp: "Operational Dossier", audit: "1. Personal Audit", trace: "2. Trace Removal", course: "OSINT Course" },
+                desc: { audit: "Network scan, full report, tips.", trace: "Audit + legend and false trails.", course: "4 lessons, software, manuals." },
+                pay: { banks: "RU Banks (Any cards / SBP)", nft: "NFT (Collections & Assets)", crypto: "Crypto (USDT / TON)" },
+                btn: "Buy / Contact"
+            },
+            ua: {
+                headers: { tg: "Акаунти Телеграм", invest: "Розслідування", protect: "Захист даних", edu: "Навчання", payment: "Оплата" },
+                services: { numbers: "Фізичні номери", dossierInfo: "Інформаційне досьє", dossierOp: "Оперативне досьє", audit: "1. Персональний аудит", trace: "2. Заміщення слідів", course: "Курс OSINT" },
+                desc: { audit: "Аналіз мережі, звіт, поради.", trace: "Аудит + легенда та хибні сліди.", course: "4 уроки, чат, софт, методички." },
+                pay: { banks: "Банки РФ (Будь-які картки)", nft: "NFT (Колекції)", crypto: "Крипто (USDT / TON)" },
+                btn: "Купити / Зв'язатися"
+            },
+            kz: {
+                headers: { tg: "Telegram Аккаунттары", invest: "Тергеу", protect: "Деректерді қорғау", edu: "Оқыту", payment: "Төлем" },
+                services: { numbers: "Физикалық нөмірлер", dossierInfo: "Ақпараттық досье", dossierOp: "Жедел досье", audit: "1. Жеке аудит", trace: "2. Іздерді ауыстыру", course: "OSINT курсы" },
+                desc: { audit: "Тексеру, есеп, кеңестер.", trace: "Аудит + аңыз және жалған іздер.", course: "4 сабақ, бағдарламалар, ДЗ." },
+                pay: { banks: "РФ Банктері", nft: "NFT коллекциялары", crypto: "Крипто (USDT / TON)" },
+                btn: "Сатып алу / Байланысу"
+            },
+            by: {
+                headers: { tg: "Акаўнты Тэлеграм", invest: "Расследаванні", protect: "Абарона дадзеных", edu: "Навучанне", payment: "Аплата" },
+                services: { numbers: "Фізічныя нумары", dossierInfo: "Інфармацыйнае дасье", dossierOp: "Аператыўнае дасье", audit: "1. Персанальны аўдыт", trace: "2. Замяшчэнне слядоў", course: "Курс OSINT" },
+                desc: { audit: "Аналіз сеткі, справаздача.", trace: "Аўдыт + легенда.", course: "4 урокі, чат, софт." },
+                pay: { banks: "Банкі РФ", nft: "NFT Калекцыі", crypto: "Крыпта (USDT / TON)" },
+                btn: "Купіць / Звязацца"
+            },
+            uz: {
+                headers: { tg: "Telegram Akkauntlar", invest: "Tekshiruvlar", protect: "Himoya", edu: "O'qitish", payment: "To'lov" },
+                services: { numbers: "Jismoniy raqamlar", dossierInfo: "Axborot dosyesi", dossierOp: "Operativ dosye", audit: "1. Shaxsiy audit", trace: "2. Izlarni o'chirish", course: "OSINT kursi" },
+                desc: { audit: "Tekshirish, tavsiyalar.", trace: "Audit + soxta afsona.", course: "4 dars, dasturlar, metodika." },
+                pay: { banks: "RF Banklari", nft: "NFT To'plamlari", crypto: "Kripto (USDT / TON)" },
+                btn: "Sotib olish"
+            },
+            az: {
+                headers: { tg: "Telegram Hesabları", invest: "Araşdırmalar", protect: "Qoruma", edu: "Təhsil", payment: "Ödəniş" },
+                services: { numbers: "Fiziki nömrələr", dossierInfo: "İnformasiya dosyesi", dossierOp: "Operativ dosye", audit: "1. Şəxsi audit", trace: "2. İzlərin silinməsi", course: "OSINT kursu" },
+                desc: { audit: "Yoxlama, hesabat.", trace: "Audit + saxta əfsanə.", course: "4 dərs, proqramlar." },
+                pay: { banks: "RF Bankları", nft: "NFT Kolleksiyaları", crypto: "Kripto (USDT / TON)" },
+                btn: "Almaq / Əlaqə"
+            },
+            am: {
+                headers: { tg: "Telegram Հաշիվներ", invest: "Հետաքննություն", protect: "Պաշտպանություն", edu: "Ուսուցում", payment: "Վճարում" },
+                services: { numbers: "Ֆիզիկական համարներ", dossierInfo: "Տեղեկատվական դոսյե", dossierOp: "Օպերատիվ դոսյե", audit: "1. Անձնական աուդիտ", trace: "2. Հետքերի վերացում", course: "OSINT դասընթաց" },
+                desc: { audit: "Ցանցի ստուգում, զեկույց:", trace: "Աուդիտ + կեղծ լեգենդ:", course: "4 դասախոսություն, ձեռնարկներ:" },
+                pay: { banks: "ՌԴ Բանկեր", nft: "NFT Հավաքածուներ", crypto: "Կրիպտո (USDT / TON)" },
+                btn: "Գնել / Կապվել"
+            }
+        };
+
+        function changeLanguage() {
+            const lang = document.getElementById('languageSelect').value;
+            const t = translations[lang];
+
+            document.getElementById('header-tg').textContent = t.headers.tg;
+            document.getElementById('header-invest').textContent = t.headers.invest;
+            document.getElementById('header-protect').textContent = t.headers.protect;
+            document.getElementById('header-edu').textContent = t.headers.edu;
+            document.getElementById('header-payment').textContent = t.headers.payment;
+
+            document.getElementById('service-numbers').textContent = t.services.numbers;
+            document.getElementById('service-dossier-info').textContent = t.services.dossierInfo;
+            document.getElementById('service-dossier-op').textContent = t.services.dossierOp;
+            document.getElementById('service-audit').textContent = t.services.audit;
+            document.getElementById('service-trace').textContent = t.services.trace;
+            document.getElementById('service-course').textContent = t.services.course;
+
+            document.getElementById('desc-audit').textContent = t.desc.audit;
+            document.getElementById('desc-trace').textContent = t.desc.trace;
+            document.getElementById('desc-course').textContent = t.desc.course;
+
+            document.getElementById('pay-banks').textContent = t.pay.banks;
+            document.getElementById('pay-nft').textContent = t.pay.nft;
+            document.getElementById('pay-crypto').textContent = t.pay.crypto;
+
+            document.getElementById('btn-contact').textContent = t.btn;
+        }
+    </script>
+</body>
+</html>
+
